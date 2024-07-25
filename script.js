@@ -7,8 +7,7 @@ let options = ["rock", "paper", "scissors"];
 
 // Function to let computer choose an option from "options" variable. It's either 0, 1 or 2.
 function getComputerChoice() {
-    const number = Math.floor(Math.random() * options.length);
-    console.log(number);
+    const number = options[Math.floor(Math.random() * options.length)];
     return number;
 }
 
@@ -59,10 +58,10 @@ function checkWinner(playerSelection, computerSelection) {
 
 function playRound(playerSelection, computerSelection) {
     const result = checkWinner(playerSelection, computerSelection)
-    if (result = "Tie") {
+    if (result === "Tie") {
        return "It's a tie"   
     }
-    else if (result = "Player"){
+    else if (result === "Player"){
         return `You win ${playerSelection} beats ${computerSelection}`
     }
     else {
@@ -103,3 +102,4 @@ function game(){
 }
 
 
+game()
