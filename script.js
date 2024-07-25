@@ -92,4 +92,14 @@ function scoreboard(humanChoice, computerChoice){
 }
 
 
+// Finally, Game function has been added along with For loop, the game function will repeat the playround and scoreboard until it reaches 5th round.
+function game(){
+    for (let i = 0; i <= 5; i++) {
+        const humanChoice = getPlayerChoice();
+        const computerChoice = getComputerChoice();
+        console.log(playRound(humanChoice, computerChoice));
+        console.log(scoreboard(humanChoice, computerChoice));        
+    }
+}
+
 
