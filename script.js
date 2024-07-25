@@ -70,3 +70,26 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+
+// Scoreboard function, 2 score variables will increment after whichever player wins and will return the text along with the scoreboard.
+let playerScore = 0;
+let computerScore = 0;
+
+function scoreboard(humanChoice, computerChoice){
+    const scoreboard = checkWinner(humanChoice, computerChoice)
+
+    if (scoreboard === "Tie") {
+        return `It's tie! Player: ${playerScore} - ${computerScore} Computer`
+    }
+    else if (scoreboard === "Player"){
+        playerScore++
+        return `Player Wins! Player: ${playerScore} - ${computerScore} Computer`
+    }
+    else {
+        computerScore++
+        return `Computer Wins! Player: ${playerScore} - ${computerScore} Computer`
+    }
+}
+
+
+
