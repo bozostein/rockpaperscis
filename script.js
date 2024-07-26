@@ -2,7 +2,12 @@
 
 let options = ["rock", "paper", "scissors"];
 
-
+const rockButton = document.querySelector('#rock-btn');
+const paperButton = document.querySelector('#paper-btn');
+const scissorsButton = document.querySelector('#scissors-btn');
+const secondDiv = document.querySelector('.results')
+const playerPoints = document.querySelector(".playerScore");
+const computerPoints = document.querySelector(".computerScore");
 
 
 // Function to let computer choose an option from "options" variable. It's either 0, 1 or 2.
@@ -16,7 +21,7 @@ function getComputerChoice() {
 // Function to get player's choice by prompt function. 
 // When player writes an option like "rock" getPlayerFunction, takes the input, makes it all lowercase and returns it. 
 
-function getPlayerChoice() {
+/*function getPlayerChoice() {
     let playerSelection = false;
     
     while (playerSelection == false){
@@ -33,7 +38,7 @@ function getPlayerChoice() {
             playerSelection = true;
             return selectionInLower;
         }
-}   }
+}   } */
 
 
 // Win conditions are created according to playerSelection and computerSelection parameters.
@@ -59,18 +64,23 @@ function checkWinner(playerSelection, computerSelection) {
 function playRound(playerSelection, computerSelection) {
     const result = checkWinner(playerSelection, computerSelection)
     if (result === "Tie") {
-       return "It's a tie"   
+        secondDiv.textContent = "It's TIE";
     }
     else if (result === "Player"){
-        return `You win ${playerSelection} beats ${computerSelection}`
+        secondDiv.textContent = `You win ${playerSelection} beats ${computerSelection}`;
     }
     else {
-        return `You lose ${computerSelection} beats ${playerSelection}`
+        const p = document.createElement('h3');
+        secondDiv.textContent = `You lose ${computerSelection} beats ${playerSelection}`;
     }
 }
 
 
+
+
+
 // Scoreboard function, 2 score variables will increment after whichever player wins and will return the text along with the scoreboard.
+
 let playerScore = 0;
 let computerScore = 0;
 
@@ -78,28 +88,40 @@ function scoreboard(humanChoice, computerChoice){
     const scoreboard = checkWinner(humanChoice, computerChoice)
 
     if (scoreboard === "Tie") {
-        return `It's tie! Player: ${playerScore} - ${computerScore} Computer`
+        playerPoints.textContent = `Player: ${playerScore} `;
+        computerPoints.textContent = `Computer Score: ${computerScore} `;
     }
     else if (scoreboard === "Player"){
-        playerScore++
-        return `Player Wins! Player: ${playerScore} - ${computerScore} Computer`
+        playerScore++;
+        
+        playerPoints.textContent = `Player: ${playerScore} `;
+        computerPoints.textContent = `Computer Score: ${computerScore} `;
     }
     else {
-        computerScore++
-        return `Computer Wins! Player: ${playerScore} - ${computerScore} Computer`
+        computerScore++;
+        playerPoints.textContent = `Player: ${playerScore} `;
+        computerPoints.textContent = `Computer Score: ${computerScore} `;
     }
-}
+} 
 
+rockButton.addEventListener("click", () => {
+    const computerSelection = getComputerChoice();
+    const playerSelection = "rock";
+    playRound(playerSelection, computerSelection);
+    scoreboard(playerSelection, computerSelection);
+})
 
+paperButton.addEventListener("click", () => {
+    const computerSelection = getComputerChoice();
+    const playerSelection = "paper";
+    playRound(playerSelection, computerSelection);
+    scoreboard(playerSelection, computerSelection);
+})
+
+scissorsButton.addEventListener("click", () => {
+    const computerSelection = getComputerChoice();
+    const playerSelection = "scissors";
+    playRound(playerSelection, computerSelection);
+    scoreboard(playerSelection, computerSelection);
+})
 // Finally, Game function has been added along with For loop, the game function will repeat the playround and scoreboard until it reaches 5th round.
-function game(){
-    for (let i = 0; i <= 5; i++) {
-        const humanChoice = getPlayerChoice();
-        const computerChoice = getComputerChoice();
-        console.log(playRound(humanChoice, computerChoice));
-        console.log(scoreboard(humanChoice, computerChoice));        
-    }
-}
-
-
-game()
